@@ -153,7 +153,6 @@ void clocks_init(void) {
     /// \end::pll_settings[]
 
     /// \tag::pll_init[]
-    pll_init(pll_sys, 1, 1500 * MHZ, 6, 2);
     pll_init(pll_usb, 1, 480 * MHZ, 5, 2);
     /// \end::pll_init[]
 
@@ -165,21 +164,21 @@ void clocks_init(void) {
                     12 * MHZ,
                     12 * MHZ);
 
-    /// \tag::configure_clk_sys[]
-    // CLK SYS = PLL SYS (125MHz) / 1 = 125MHz
-    clock_configure(clk_sys,
-                    CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
-                    CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,
-                    125 * MHZ,
-                    125 * MHZ);
-    /// \end::configure_clk_sys[]
-
     // CLK USB = PLL USB (48MHz) / 1 = 48MHz
     clock_configure(clk_usb,
                     0, // No GLMUX
                     CLOCKS_CLK_USB_CTRL_AUXSRC_VALUE_CLKSRC_PLL_USB,
                     48 * MHZ,
                     48 * MHZ);
+
+    /// \tag::configure_clk_sys[]
+    // CLK SYS = PLL USB (48MHz) / 1 = 48MHz
+    clock_configure(clk_sys,
+                    CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
+                    CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_CLKSRC_PLL_USB,
+                    48 * MHZ,
+                    48 * MHZ);
+    /// \end::configure_clk_sys[]
 
     // CLK ADC = PLL USB (48MHZ) / 1 = 48MHz
     clock_configure(clk_adc,
@@ -200,8 +199,8 @@ void clocks_init(void) {
     clock_configure(clk_peri,
                     0,
                     CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLK_SYS,
-                    125 * MHZ,
-                    125 * MHZ);
+                    48 * MHZ,
+                    48 * MHZ);
 }
 
 /// \tag::clock_get_hz[]
