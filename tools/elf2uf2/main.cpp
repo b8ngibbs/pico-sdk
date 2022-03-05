@@ -71,6 +71,7 @@ typedef std::vector<address_range> address_ranges;
 const address_ranges rp2040_address_ranges_flash {
     address_range(FLASH_START, FLASH_END, address_range::type::CONTENTS),
     address_range(MAIN_RAM_START, MAIN_RAM_END, address_range::type::NO_CONTENTS),
+    address_range(XIP_SRAM_START, XIP_SRAM_END, address_range::type::NO_CONTENTS),
     address_range(MAIN_RAM_BANKED_START, MAIN_RAM_BANKED_END, address_range::type::NO_CONTENTS)
 };
 
