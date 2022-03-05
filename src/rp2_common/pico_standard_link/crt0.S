@@ -8,6 +8,7 @@
 #include "hardware/regs/m0plus.h"
 #include "hardware/regs/addressmap.h"
 #include "hardware/regs/sio.h"
+#include "hardware/regs/xip.h"
 #include "pico/binary_info/defs.h"
 
 #ifdef NDEBUG
@@ -224,6 +225,12 @@ _reset_handler:
     ldr r0, [r0]
     cmp r0, #0
     bne hold_non_core0_in_bootrom
+
+#if PICO_DISABLE_XIP_CACHE
+    movs r0, #0
+    ldr r1, =(XIP_CTRL_BASE + XIP_CTRL_OFFSET)
+    str r0, [r1]
+#endif
 
     adr r4, data_cpy_table
 
