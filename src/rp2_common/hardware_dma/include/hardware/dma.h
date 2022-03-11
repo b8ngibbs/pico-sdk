@@ -229,6 +229,20 @@ static inline void channel_config_set_ring(dma_channel_config *c, bool write, ui
               (write ? DMA_CH0_CTRL_TRIG_RING_SEL_BITS : 0);
 }
 
+/*! \brief  Set address wrapping write parameters
+ *  \ingroup channel_config
+ */
+static inline void channel_config_set_write_ring(dma_channel_config *c, uint size_bits) {
+    channel_config_set_ring(c, true, size_bits);
+}
+
+/*! \brief  Set address wrapping read parameters
+ *  \ingroup channel_config
+ */
+static inline void channel_config_set_read_ring(dma_channel_config *c, uint size_bits) {
+    channel_config_set_ring(c, false, size_bits);
+}
+
 /*! \brief  Set DMA byte swapping
  *  \ingroup channel_config
  *
