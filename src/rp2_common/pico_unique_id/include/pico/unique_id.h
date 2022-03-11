@@ -59,6 +59,11 @@ typedef struct {
  */
 void pico_get_unique_board_id(pico_unique_board_id_t *id_out);
 
+/*! \brief Get raw unique ID without a copy.
+ *  \ingroup pico_unique_id
+ */
+pico_unique_board_id_t *pico_get_unique_board_id_raw(void);
+
 /*! \brief Get unique ID in string format
  *  \ingroup pico_unique_id
  *
