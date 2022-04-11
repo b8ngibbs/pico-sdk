@@ -96,6 +96,15 @@ _stage2_boot:
 // Pull in standard exit routine
 #include "boot2_helpers/exit_from_boot2.S"
 
+.global board_info
+board_info:
+    // Add some padding to allow for future expansion of above
+    // The combination of above places the first .byte at offset 96
+    .align 4
+    .space 32
+    // This should map to a boot_board_info_t
+    .byte BOARD_REVISON
+
 .global literals
 literals:
 .ltorg
